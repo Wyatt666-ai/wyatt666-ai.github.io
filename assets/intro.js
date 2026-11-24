@@ -10,7 +10,7 @@
     // A file preview can run with browser storage disabled.
   }
 
-  const autoplay = !seen && !motion.matches && ['', '#workspace'].includes(location.hash);
+  const autoplay = !seen && !motion.matches && ['', '#room', '#workspace'].includes(location.hash);
   if (autoplay) root.classList.add('boot-pending');
 
   document.addEventListener('DOMContentLoaded', () => {

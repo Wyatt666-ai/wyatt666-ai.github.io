@@ -1,6 +1,7 @@
 (() => {
   const root = document.documentElement;
   const workspace = document.querySelector('#workspace');
+  const home = document.querySelector('#room') || workspace;
   const views = [...document.querySelectorAll('.view')];
   const links = [...document.querySelectorAll('.rail-nav a')];
   const viewName = document.querySelector('[data-view-name]');
@@ -29,7 +30,7 @@
     if (fragment === 'main' && root.classList.contains('workspace-ready')) return;
 
     const target = document.getElementById(fragment);
-    const view = target?.closest('.view') || workspace;
+    const view = target?.closest('.view') || home;
     const record = target?.closest('.record');
     for (const candidate of views) candidate.hidden = candidate !== view;
     for (const link of links) {

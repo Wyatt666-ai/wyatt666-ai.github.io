@@ -3,14 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="一页工作台。用站内指令探索我的项目、笔记和个人资料。">
+  <meta name="description" content="一页。走进我的 3D 书房，探索项目、笔记和个人资料。">
   <meta name="theme-color" content="#0c0e14">
-  <title>一页 · 个人工作台</title>
+  <title>一页 · 我的房间</title>
   <link rel="icon" href="./assets/favicon.png" type="image/png">
   <link rel="stylesheet" href="./assets/site.css">
   <link rel="stylesheet" href="./assets/intro.css">
+  <link rel="stylesheet" href="./assets/room.css">
   <script src="./assets/intro.js"></script>
   <script src="./assets/workspace.js" defer></script>
+  <script src="./assets/room.js" defer></script>
 </head>
 <body>
   <dialog id="site-intro" class="boot" aria-label="一页工作台启动动画">
@@ -33,9 +35,10 @@
   <a class="skip-link" href="#main">跳到正文</a>
   <div class="layout">
     <aside class="rail" aria-label="工作区导航">
-      <a class="brand" href="#workspace"><i class="mark" aria-hidden="true"></i><span>一页<small>个人工作台</small></span></a>
+        <a class="brand" href="#room"><i class="mark" aria-hidden="true"></i><span>一页<small>个人主页</small></span></a>
       <nav class="rail-nav" aria-label="主导航">
-        <a href="#workspace" aria-current="page"><i class="nav-icon nav-home" aria-hidden="true"></i>工作台</a>
+          <a href="#room" aria-current="page"><i class="nav-icon nav-room" aria-hidden="true"></i>房间</a>
+          <a href="#workspace"><i class="nav-icon nav-home" aria-hidden="true"></i>工作台</a>
         <a href="#projects"><i class="nav-icon nav-project" aria-hidden="true"></i>项目</a>
         <a href="#notes"><i class="nav-icon nav-note" aria-hidden="true"></i>笔记</a>
         <a href="#about"><i class="nav-icon nav-about" aria-hidden="true"></i>关于我</a>
@@ -45,7 +48,7 @@
 
     <div class="desk">
       <header class="toolbar">
-        <p class="location"><span>一页</span><span aria-hidden="true">/</span><strong data-view-name>工作台</strong></p>
+        <p class="location"><span>一页</span><span aria-hidden="true">/</span><strong data-view-name>房间</strong></p>
         <div class="toolbar-actions">
           <button class="quick-search" type="button" hidden><i class="search-icon" aria-hidden="true"></i>站内搜索 <kbd>Ctrl K</kbd></button>
           <span class="mode"><i aria-hidden="true"></i>本地模式</span>
@@ -53,6 +56,24 @@
       </header>
 
       <main id="main" tabindex="-1" class="content">
+        <section id="room" class="view" aria-labelledby="room-title" data-view-label="房间">
+          <div class="room-landing">
+            <div class="room-copy">
+              <h1 id="room-title">欢迎来到<br>我的房间<span>。</span></h1>
+              <p>桌上的电脑收着我的项目，书架上放着笔记。点亮的标记可以打开房间里的内容。</p>
+              <a class="room-action" href="#workspace"><i class="nav-icon nav-home" aria-hidden="true"></i>打开工作台</a>
+            </div>
+            <figure class="room-stage">
+              <div class="room-object">
+                <img src="./assets/study-room.webp" width="1440" height="1080" alt="暖光下的微缩书房，摆着电脑、书架和墙上的相框" fetchpriority="high">
+                <a class="room-pin pin-projects" href="#projects" aria-label="电脑，查看项目"><i aria-hidden="true"></i><span>项目</span></a>
+                <a class="room-pin pin-notes" href="#notes" aria-label="书架，浏览笔记"><i aria-hidden="true"></i><span>笔记</span></a>
+                <a class="room-pin pin-about" href="#about" aria-label="相框，查看个人资料"><i aria-hidden="true"></i><span>关于我</span></a>
+              </div>
+            </figure>
+          </div>
+        </section>
+
         <section id="workspace" class="view" aria-labelledby="welcome" data-view-label="工作台">
           <div class="workspace-grid">
             <div class="workspace-main">
@@ -109,7 +130,7 @@
               <div class="project-art workspace-art" aria-hidden="true"></div>
               <div class="record-body">
                 <h2 class="record-title">一页工作台</h2>
-                <p class="record-summary">用本地指令查找项目和笔记的个人网站，包含一段系统校验风格的启动动画。</p>
+                  <p class="record-summary">在 3D 书房里探索个人网站，也可以用工作台的本地指令查找项目和笔记。</p>
                 <details><summary>项目详情</summary><p>页面和搜索在浏览器内运行，使用 HTML、CSS 和 JavaScript，可部署到 GitHub Pages。</p></details>
               </div>
             </article>
