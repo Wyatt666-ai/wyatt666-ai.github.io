@@ -1,0 +1,81 @@
+html.boot-open { overflow: hidden; }
+html.boot-pending body::before { position: fixed; z-index: 9; inset: 0; background: #080a0e; content: ""; pointer-events: none; animation: boot-failsafe 0s 1.1s forwards; }
+
+.boot { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; overflow: hidden; border: 0; background: #0c0e14; color: #202633; }
+.boot::backdrop { background: transparent; }
+.boot-sheet, .boot-splash { position: absolute; inset: 0; }
+.boot-sheet {
+  --ink: #262c37;
+  --boot-blue: #365baf;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(1.15rem, 4.5vw, 3.4rem);
+  background:
+    radial-gradient(ellipse at 50% 47%, #f8f8f6 9%, #eeefed 69%, #e3e6eb 100%);
+  color: var(--ink);
+}
+.boot-sheet::before, .boot-sheet::after { position: absolute; z-index: -1; inset: 0; content: ""; pointer-events: none; }
+.boot-sheet::before {
+  background-image: linear-gradient(#242c4210 1px, transparent 1px), linear-gradient(90deg, #242c4210 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(ellipse, #000 0%, #0006 51%, transparent 86%);
+}
+.boot-sheet::after { inset: clamp(.75rem, 2.5vw, 2.1rem); border: 1px solid #39425c38; }
+.boot-header, .boot-footer { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
+.boot-header { font-size: .84rem; color: #424c62; }
+.boot-sign { display: flex; align-items: center; gap: .48rem; font-weight: 800; color: #202839; }
+.boot-sign .mark { width: 1.7rem; color: var(--ink); border-radius: .32rem; }
+
+.boot-center { position: relative; align-self: center; display: grid; justify-items: center; gap: .42rem; text-align: center; }
+.boot-dial {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(5rem, 24vmin, 13rem);
+  aspect-ratio: 1;
+  margin-bottom: .9rem;
+  border: 1px solid #2c3a5c33;
+  border-radius: 50%;
+  background: repeating-conic-gradient(#4b5d8d30 0 1deg, transparent 1deg 12deg);
+  box-shadow: inset 0 0 0 .65rem #f7f8f6;
+}
+.boot-dial::before, .boot-dial::after { position: absolute; inset: 9%; border: 1px solid #6a7a9a5c; border-radius: 50%; content: ""; }
+.boot-dial::before { inset: -1px; border: 2px solid transparent; border-top-color: #25344f; border-right-color: #25344f; animation: boot-orbit 2.8s .45s cubic-bezier(.26,.68,.41,1) both; }
+.boot-dial::after { background: #f3f4f1; }
+.boot-dial .mark { z-index: 1; width: clamp(2.1rem, 7vmin, 4.15rem); border: 0; color: #384969; }
+.boot-dial .mark::before, .boot-dial .mark::after { border-width: 2px; }
+.boot-phase { font-size: clamp(1.7rem, 5.6vmin, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: .08em; text-wrap: balance; }
+.boot-detail { color: #4d5b73; font-size: clamp(.83rem, 2.2vmin, 1rem); }
+.boot [data-step] .boot-phase { animation: boot-text .32s ease-out both; }
+.boot .boot-sheet[data-step="2"] .boot-phase,
+.boot .boot-sheet[data-step="4"] .boot-phase { animation-name: boot-text-confirm; }
+.boot .boot-sheet[data-step="4"] .boot-phase { color: var(--boot-blue); }
+
+.boot-footer { padding-right: 7rem; min-height: 2rem; font: .78rem ui-monospace, monospace; color: #414d65; }
+.boot-track { position: relative; width: min(52vw, 19rem); height: 2px; background: #c0c8d6; }
+.boot-track i { position: absolute; inset: 0; transform: scaleX(0); transform-origin: left; background: #4e63a2; animation: boot-progress 3.25s .35s linear both; }
+.boot-splash { z-index: 1; display: grid; place-content: center; justify-items: center; gap: .45rem; background: #080a0e; color: #f3f7ff; font-size: 1rem; letter-spacing: .32em; pointer-events: none; animation: boot-splash .84s ease-in both; }
+.boot-splash .mark { width: 3.2rem; color: #edf2ff; }
+.boot-splash > span { margin-right: -.32em; }
+.boot-skip { position: absolute; z-index: 2; right: clamp(1rem, 4.5vw, 3.4rem); bottom: clamp(1rem, 4.5vw, 3.4rem); min-height: 2.35rem; padding: .34rem .68rem; border: 1px solid #697584; border-radius: .35rem; background: #182131; color: #f1f4fa; font-size: .82rem; }
+.boot-skip:hover { background: #30446b; }
+.boot-leaving { animation: boot-exit .38s cubic-bezier(.45,0,.55,1) both; }
+
+@keyframes boot-failsafe { to { visibility: hidden; } }
+@keyframes boot-splash { 0%, 58% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+@keyframes boot-orbit { from { transform: rotate(-135deg); opacity: .13; } to { transform: rotate(235deg); opacity: 1; } }
+@keyframes boot-progress { to { transform: scaleX(1); } }
+@keyframes boot-text { from { opacity: .2; transform: translateY(.27rem); } to { opacity: 1; transform: none; } }
+@keyframes boot-text-confirm { from { opacity: .2; transform: translateY(.27rem); } to { opacity: 1; transform: none; } }
+@keyframes boot-exit { from { clip-path: inset(0); } to { clip-path: inset(50% 0 50% 0); } }
+
+@media (orientation: landscape) and (max-height: 26rem) {
+  .boot-sheet { padding-block: .85rem; }
+  .boot-dial { margin-bottom: .45rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .boot, .boot *, html.boot-pending body::before { animation: none !important; }
+  html.boot-pending body::before { display: none; }
+}
+
