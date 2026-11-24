@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="一页工作台。用站内指令探索我的项目、笔记和个人资料。">
+  <meta name="theme-color" content="#0c0e14">
+  <title>一页 · 个人工作台</title>
+  <link rel="icon" href="./assets/favicon.png" type="image/png">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/intro.css">
+  <script src="./assets/intro.js"></script>
+  <script src="./assets/workspace.js" defer></script>
+</head>
+<body>
+  <dialog id="site-intro" class="boot" aria-label="一页工作台启动动画">
+    <div class="boot-sheet">
+      <header class="boot-header"><span class="boot-sign"><i class="mark" aria-hidden="true"></i>一页</span><span>本地工作台</span></header>
+      <div class="boot-center">
+        <div class="boot-dial" aria-hidden="true"><i class="mark"></i></div>
+        <p class="boot-phase" role="status">载入工作台</p>
+        <p class="boot-detail">初始化界面</p>
+      </div>
+      <footer class="boot-footer">
+        <div class="boot-track" aria-hidden="true"><i></i></div>
+        <span class="boot-count" aria-hidden="true">01 / 04</span>
+      </footer>
+    </div>
+    <div class="boot-splash" aria-hidden="true"><i class="mark"></i><span>一页</span></div>
+    <button class="boot-skip" type="button" autofocus>跳过开场</button>
+  </dialog>
+
+  <a class="skip-link" href="#main">跳到正文</a>
+  <div class="layout">
+    <aside class="rail" aria-label="工作区导航">
+      <a class="brand" href="#workspace"><i class="mark" aria-hidden="true"></i><span>一页<small>个人工作台</small></span></a>
+      <nav class="rail-nav" aria-label="主导航">
+        <a href="#workspace" aria-current="page"><i class="nav-icon nav-home" aria-hidden="true"></i>工作台</a>
+        <a href="#projects"><i class="nav-icon nav-project" aria-hidden="true"></i>项目</a>
+        <a href="#notes"><i class="nav-icon nav-note" aria-hidden="true"></i>笔记</a>
+        <a href="#about"><i class="nav-icon nav-about" aria-hidden="true"></i>关于我</a>
+      </nav>
+      <button class="boot-replay" type="button" hidden><span aria-hidden="true">↻</span>重播开场</button>
+    </aside>
+
+    <div class="desk">
+      <header class="toolbar">
+        <p class="location"><span>一页</span><span aria-hidden="true">/</span><strong data-view-name>工作台</strong></p>
+        <div class="toolbar-actions">
+          <button class="quick-search" type="button" hidden><i class="search-icon" aria-hidden="true"></i>站内搜索 <kbd>Ctrl K</kbd></button>
+          <span class="mode"><i aria-hidden="true"></i>本地模式</span>
+        </div>
+      </header>
+
+      <main id="main" tabindex="-1" class="content">
+        <section id="workspace" class="view" aria-labelledby="welcome" data-view-label="工作台">
+          <div class="workspace-grid">
+            <div class="workspace-main">
+              <div class="welcome">
+                <div class="welcome-copy">
+                  <h1 id="welcome">今天想查看什么？</h1>
+                  <p>用一条指令，查找项目、笔记和个人资料。</p>
+                </div>
+              </div>
+
+              <section class="command-panel" aria-labelledby="command-heading">
+                <h2 id="command-heading">指令面板</h2>
+                <form class="command-form" hidden>
+                  <label class="sr-only" for="command">输入站内指令</label>
+                  <input id="command" type="text" maxlength="120" autocomplete="off" placeholder="例如：搜索 GitHub，或者查看项目" required>
+                  <button type="submit">执行</button>
+                </form>
+                <div class="command-shortcuts" hidden>
+                  <button type="button" data-command="查看项目">查看项目</button>
+                  <button type="button" data-command="浏览笔记">浏览笔记</button>
+                  <button type="button" data-command="关于我">关于我</button>
+                </div>
+                <noscript><p class="small-copy">可以通过导航直接浏览项目、笔记和个人资料。</p></noscript>
+              </section>
+
+              <section class="results" aria-label="指令结果" aria-live="polite" hidden></section>
+
+              <section class="recent panel" aria-labelledby="recent-title">
+                <h2 id="recent-title">最近更新</h2>
+                <a class="item-link" href="#project-workspace"><span class="item-icon nav-project" aria-hidden="true"></span><span><strong>一页工作台</strong><small>项目 · 本站的控制台与启动动画</small></span><span class="item-action" aria-hidden="true">查看</span></a>
+                <a class="item-link" href="#note-pages"><span class="item-icon nav-note" aria-hidden="true"></span><span><strong>把个人网站发布到 GitHub Pages</strong><small>笔记 · 建站</small></span><span class="item-action" aria-hidden="true">查看</span></a>
+              </section>
+            </div>
+
+            <aside class="context" aria-label="工作台状态">
+              <section class="panel index-panel" aria-labelledby="index-title">
+                <h2 id="index-title">站内索引</h2>
+                <dl><div><dt>项目</dt><dd data-count="项目">2</dd></div><div><dt>笔记</dt><dd data-count="笔记">2</dd></div><div><dt>个人资料</dt><dd data-count="资料">1</dd></div></dl>
+                <p class="small-copy">指令仅处理这个网站里的内容。</p>
+              </section>
+              <section class="panel activity" aria-labelledby="activity-title">
+                <h2 id="activity-title">执行记录</h2>
+                <p class="activity-empty small-copy">本次访问还没有执行指令。</p>
+                <ol class="activity-log" hidden></ol>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section id="projects" class="view library-view" aria-labelledby="projects-title" data-view-label="项目">
+          <div class="view-heading"><h1 id="projects-title">项目</h1><p>本站的界面与动画实验。</p></div>
+          <div class="project-grid">
+            <article id="project-workspace" class="panel record project" data-kind="项目" data-keywords="GitHub Pages HTML CSS JavaScript 智能体 网站 项目 开场">
+              <div class="project-art workspace-art" aria-hidden="true"></div>
+              <div class="record-body">
+                <h2 class="record-title">一页工作台</h2>
+                <p class="record-summary">用本地指令查找项目和笔记的个人网站，包含一段系统校验风格的启动动画。</p>
+                <details><summary>项目详情</summary><p>页面和搜索在浏览器内运行，使用 HTML、CSS 和 JavaScript，可部署到 GitHub Pages。</p></details>
+              </div>
+            </article>
+            <article id="project-armor" class="panel record project" data-kind="项目" data-keywords="帝皇 铠甲勇士 金白 合体 动画 开场 CSS">
+              <div class="project-art armor-art"><img src="./assets/emperor-armor.webp" alt="金白帝皇铠甲角色的项目插图" width="800" height="1200" loading="lazy"></div>
+              <div class="record-body">
+                <h2 class="record-title">帝皇铠甲开场实验</h2>
+                <p class="record-summary">此前的角色变身方案，探索以粒子聚光、分片合体和金光构成网站开场。</p>
+                <details><summary>项目详情</summary><p>角色插图由 ImageGen 生成。变身原型用 CSS 对同一幅角色图片的不同区域分别做入场动画。</p></details>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="notes" class="view library-view" aria-labelledby="notes-title" data-view-label="笔记">
+          <div class="view-heading"><h1 id="notes-title">笔记</h1><p>建站过程和可以复用的记录方法。</p></div>
+          <div class="panel note-list">
+            <details id="note-pages" class="record" data-kind="笔记" data-keywords="发布 部署 建站 仓库 Git 上传">
+              <summary><strong class="record-title">把个人网站发布到 GitHub Pages</strong><small>建站</small></summary>
+              <div class="note-content"><p class="record-summary">将站点文件提交到仓库，在 Pages 设置中选择发布分支和根目录。</p><p>首页和 <code>assets</code> 放在同一发布目录里。以后修改内容时，提交到该分支即可触发更新。</p></div>
+            </details>
+            <details id="note-writing" class="record" data-kind="笔记" data-keywords="写作 复盘 记录 学习 文章">
+              <summary><strong class="record-title">把一次尝试写成一篇短笔记</strong><small>写作</small></summary>
+              <div class="note-content"><p class="record-summary">先写问题，再记录一次尝试和结果，让以后回看时能复现。</p><p>用到的资料、关键步骤和还没想清楚的地方，也可以一起记录。</p></div>
+            </details>
+          </div>
+        </section>
+
+        <section id="about" class="view library-view" aria-labelledby="about-title" data-view-label="关于我">
+          <div class="view-heading"><h1 id="about-title">关于我</h1></div>
+          <article id="profile" class="panel record profile" data-kind="资料" data-keywords="本人 个人 站长 作者 自我介绍">
+            <img src="./assets/coastal-library.webp" alt="海边的混凝土图书馆" width="1440" height="960" loading="lazy">
+            <div class="record-body"><h2 class="record-title">我的一页</h2><p class="record-summary">这是我的个人工作台，用来整理项目、笔记和想长期留下的想法。</p></div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
